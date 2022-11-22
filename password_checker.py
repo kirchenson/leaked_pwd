@@ -1,7 +1,7 @@
 import requests
 import hashlib
 
-#создаем функцию для хеширования пароля
+# создаем функцию для хеширования пароля
 def hash_func(w):
     encoded_str = w.encode()
     hash_obj = hashlib.sha1(encoded_str)
@@ -10,7 +10,7 @@ def hash_func(w):
 
 
 def leaked_or_not(w):
-    #в url пишем путь до ресурса поиска хеша в утёкших базах данных и 5 первых символов хеша обрабатываемого слова
+    # в url пишем путь до ресурса поиска хеша в утёкших базах данных и 5 первых символов хеша обрабатываемого слова
     BASE_URL = f'https://api.pwnedpasswords.com/range/{hash_func(w)[0:5]}'
     ost = hash_func(w)[5:] # весь остальной хеш сохраняем и будем искать его на результирующей странице
     response = requests.get(f"{BASE_URL}")#get-запрос до ресурса
